@@ -1,0 +1,21 @@
+# ── Bağımlılıklar ──────────────────────────────────
+node_modules/
+
+# ── Ortam değişkenleri (asla commit edilmez) ───────
+.env
+.env.local
+.env.*.local
+
+# ── Build çıktıları ─────────────────────────────────
+dist/
+build/
+
+# ── Claude Code özel dizini ─────────────────────────
+.claude/
+
+# ── Sistem / IDE ────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
