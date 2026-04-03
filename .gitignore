@@ -10,8 +10,6 @@ node_modules/
 dist/
 build/
 
-# ── Claude Code özel dizini ─────────────────────────
-.claude/
 
 # ── Sistem / IDE ────────────────────────────────────
 .DS_Store
@@ -19,3 +17,8 @@ Thumbs.db
 *.log
 .vscode/
 .idea/
+
+# Claude
+.claude/
+claude_logs/
+*.claude.json

@@ -13,11 +13,11 @@ function useCountdown() {
   const [timeLeft, setTimeLeft] = useState({ h: '00', m: '00', s: '00' })
 
   useEffect(() => {
-    // Bu haftanın Cuma 18:00'ine kalan süre
+   
     const getTarget = () => {
       const now = new Date()
       const d   = new Date(now)
-      const day = now.getDay()           // 0=Paz … 6=Cmt
+      const day = now.getDay()          
       const daysToFri = (5 - day + 7) % 7 || 7
       d.setDate(now.getDate() + daysToFri)
       d.setHours(18, 0, 0, 0)
@@ -56,10 +56,10 @@ export default function Header() {
 
   return (
     <header className="relative overflow-hidden">
-      {/* Background layers */}
+    
       <div className="absolute inset-0 bg-gradient-to-b from-[#0d1635] via-[#0d1635] to-[#0a0f1e]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(124,58,237,0.18),transparent)]" />
-      {/* Grid pattern */}
+    
       <div
         className="absolute inset-0 opacity-[0.035]"
         style={{
@@ -69,10 +69,10 @@ export default function Header() {
         }}
       />
 
-      {/* ── Scarcity / Social proof ticker ─────── */}
+     
       <div className="relative z-10 border-b border-white/[0.06] bg-black/20">
         <div className="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between flex-wrap gap-2 text-[11px]">
-          {/* Left: rotating message */}
+       
           <div className="flex items-center gap-2 text-white/55">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
@@ -93,7 +93,7 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
-          {/* Right: countdown */}
+      
           <div className="flex items-center gap-1.5 text-amber-300 font-semibold">
             <Clock size={11} />
             <span className="text-white/40">Bu hafta fiyatı için:</span>
@@ -104,14 +104,13 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ── Main hero ───────────────────────────── */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 md:py-20 text-center">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Logo mark */}
+          
           <div className="inline-flex items-center gap-2.5 mb-7 px-4 py-2 rounded-full glass border border-white/10">
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-epurple to-purple-800 flex items-center justify-center shadow-lg shadow-purple-900/50">
               <Zap size={14} className="text-white" />
@@ -135,7 +134,7 @@ export default function Header() {
             Kurumsal kalitede — şeffaf fiyatlandırma.
           </p>
 
-          {/* Trust badges */}
+         
           <div className="flex flex-wrap items-center justify-center gap-2.5">
             {[
               { Icon: Star,       label: '4.9 / 5 Puan' },
