@@ -1,26 +1,11 @@
-/**
- * generatePDF.js
- *
- * Akış:
- *  1. HTML şablonu → gizli DOM elementi
- *  2. document.fonts.ready → Inter fontu yüklü
- *  3. html2canvas(element, scale:2) → canvas
- *  4. canvas → jsPDF.addImage  ← TEK SAYFA, otomatik sayfalandırma YOK
- *  5. doc.save()
- *
- * Türkçe karakterler tarayıcı fontuyla render edildiği için sorunsuz.
- */
-
 import jsPDF       from 'jspdf'
 import html2canvas from 'html2canvas'
 
-// ── Marka / Kişisel bilgiler  →  .env dosyasından okunur ─────
 const OWNER_NAME  = import.meta.env.VITE_OWNER_NAME   || 'Ad Soyad'
 const OWNER_TITLE = import.meta.env.VITE_OWNER_TITLE  || 'Unvan'
 const COMPANY     = import.meta.env.VITE_COMPANY_NAME || 'Şirket'
 const WEBSITE     = import.meta.env.VITE_WEBSITE      || 'www.sirketiniz.com'
 
-// ── Yardımcılar ───────────────────────────────────────────────
 const fmt = n =>
   '\u20BA' + n.toLocaleString('tr-TR', { maximumFractionDigits: 0 })
 
@@ -32,16 +17,12 @@ const fmtDate = (offsetDays = 0) =>
     day: '2-digit', month: 'long', year: 'numeric',
   })
 
-// ── HTML Şablon ───────────────────────────────────────────────
-// Tamamen TABLE bazlı layout — html2canvas ile maksimum uyumluluk.
-// Hedef render genişliği: 794px  (A4 @ 96dpi)
 function buildHTML(info, pricing) {
   const QN      = qNo()
   const today   = fmtDate(0)
   const validTo = fmtDate(15)
   const svcs    = pricing.selectedServices
 
-  /* ── Hizmet satırları ── */
   const rows = svcs.map((s, i) => `
     <tr style="background:${i % 2 === 0 ? '#ffffff' : '#f8f9ff'};">
       <td style="padding:9px 14px;border-bottom:1px solid #eaedff;vertical-align:top;">
@@ -61,7 +42,6 @@ function buildHTML(info, pricing) {
       </td>
     </tr>`).join('')
 
-  /* ── İndirim satırları ── */
   const discountRows = [
     pricing.bundleDiscount && `
       <tr>
@@ -98,7 +78,6 @@ function buildHTML(info, pricing) {
       </tr>`,
   ].filter(Boolean).join('')
 
-  /* ── Ödeme planı ── */
   const payRows = [[.40,'Sözleşme imzasında'],[.30,'Proje yarısında'],[.30,'Proje tesliminde']]
     .map(([pct, label]) => `
       <tr>
@@ -109,7 +88,6 @@ function buildHTML(info, pricing) {
         </td>
       </tr>`).join('')
 
-  /* ── Teklif şartları ── */
   const termItems = [
     'Teklif 15 gün geçerlidir',
     'Fiyatlara KDV dahildir (%20)',
@@ -133,13 +111,11 @@ function buildHTML(info, pricing) {
   background:#ffffff;
 ">
 
-  <!-- ═══════════ HEADER ═══════════ -->
   <div style="
     background:#070c1b;
     padding:24px 40px 20px;
     position:relative;
   ">
-    <!-- Üst mor şerit -->
     <div style="
       position:absolute;top:0;left:0;right:0;height:4px;
       background:linear-gradient(90deg,#7c3aed,#8b5cf6,#4f46e5);
@@ -177,7 +153,6 @@ function buildHTML(info, pricing) {
     </table>
   </div>
 
-  <!-- ═══════════ MÜŞTERİ ═══════════ -->
   <div style="
     background:#eef2ff;
     padding:14px 40px;
@@ -207,10 +182,8 @@ function buildHTML(info, pricing) {
     </table>
   </div>
 
-  <!-- ═══════════ HİZMETLER ═══════════ -->
   <div style="padding:20px 40px 0;">
 
-    <!-- Bölüm başlığı -->
     <table style="width:100%;border-collapse:collapse;margin-bottom:10px;">
       <tr>
         <td style="
@@ -222,10 +195,8 @@ function buildHTML(info, pricing) {
       </tr>
     </table>
 
-    <!-- Tablo -->
     <table style="width:100%;border-collapse:collapse;border-radius:8px;overflow:hidden;">
 
-      <!-- Başlık satırı -->
       <thead>
         <tr style="background:#0f172a;">
           <th style="padding:9px 14px;text-align:left;font-size:8.5px;font-weight:700;
@@ -243,7 +214,6 @@ function buildHTML(info, pricing) {
       <tbody>
         ${rows}
 
-        <!-- Ara toplam -->
         <tr style="background:#f8f9ff;border-top:1.5px solid #dde3ff;">
           <td colspan="2" style="padding:8px 14px;text-align:right;
                                   font-size:10.5px;color:#64748b;">Ara Toplam</td>
@@ -255,13 +225,11 @@ function buildHTML(info, pricing) {
 
         ${discountRows}
 
-        <!-- Ayırıcı -->
         <tr>
           <td colspan="3" style="padding:0;height:1.5px;
                                   background:linear-gradient(90deg,transparent,#c4b5fd,transparent);"></td>
         </tr>
 
-        <!-- TOPLAM -->
         <tr style="background:linear-gradient(135deg,#f5f0ff,#eef2ff);">
           <td colspan="2" style="padding:11px 14px;text-align:right;
                                   font-size:11.5px;font-weight:800;color:#0f172a;
@@ -283,12 +251,10 @@ function buildHTML(info, pricing) {
     </table>
   </div>
 
-  <!-- ═══════════ ÖDEME & ŞARTLAR ═══════════ -->
   <div style="padding:16px 40px;">
     <table style="width:100%;border-collapse:collapse;">
       <tr>
 
-        <!-- Ödeme Planı -->
         <td style="width:48%;vertical-align:top;padding-right:8px;">
           <div style="background:#f8f9ff;border:1px solid #dde3ff;
                       border-radius:10px;padding:13px 15px;">
@@ -301,7 +267,6 @@ function buildHTML(info, pricing) {
           </div>
         </td>
 
-        <!-- Teklif Şartları -->
         <td style="width:52%;vertical-align:top;padding-left:8px;">
           <div style="background:#f8f9ff;border:1px solid #dde3ff;
                       border-radius:10px;padding:13px 15px;">
@@ -318,7 +283,6 @@ function buildHTML(info, pricing) {
     </table>
   </div>
 
-  <!-- ═══════════ NOT (varsa) ═══════════ -->
   ${info.note ? `
   <div style="margin:0 40px 14px;">
     <div style="background:#fffbeb;border:1px solid #fde68a;
@@ -331,7 +295,6 @@ function buildHTML(info, pricing) {
     </div>
   </div>` : ''}
 
-  <!-- ═══════════ İMZA ═══════════ -->
   <div style="padding:0 40px 16px;">
     <table style="width:100%;border-collapse:collapse;">
       <tr>
@@ -355,9 +318,7 @@ function buildHTML(info, pricing) {
     </table>
   </div>
 
-  <!-- ═══════════ FOOTER ═══════════ -->
   <div style="background:#070c1b;padding:12px 40px;">
-    <!-- Üst çizgi -->
     <div style="
       height:2px;margin-bottom:9px;
       background:linear-gradient(90deg,#7c3aed,#8b5cf6,transparent);
@@ -378,9 +339,7 @@ function buildHTML(info, pricing) {
 </div>`
 }
 
-// ── Ana export ────────────────────────────────────────────────
 export async function generateQuotePDF(customerInfo, pricing) {
-  // 1. DOM'a gizlice enjekte et
   const wrapper = document.createElement('div')
   wrapper.style.cssText = [
     'position:fixed',
@@ -395,31 +354,26 @@ export async function generateQuotePDF(customerInfo, pricing) {
 
   const page = wrapper.firstElementChild
 
-  // 2. Fontların yüklenmesini bekle
   await document.fonts.ready
   await new Promise(r => setTimeout(r, 350))
 
-  // 3. html2canvas ile 2× çözünürlüklü canvas
   const canvas = await html2canvas(page, {
     scale:           2,
     useCORS:         true,
     backgroundColor: '#ffffff',
     logging:         false,
     width:           794,
-    // height yok — içerik ne kadar uzunsa o kadar
   })
 
   document.body.removeChild(wrapper)
 
-  // 4. Canvas boyutunu mm'ye çevir (A4 genişliği = 210mm)
   const MM_WIDTH  = 210
   const MM_HEIGHT = (canvas.height / canvas.width) * MM_WIDTH
 
-  // 5. Tek sayfa PDF — sayfa boyutu canvas boyutuyla aynı
   const doc = new jsPDF({
     orientation: 'portrait',
     unit:        'mm',
-    format:      [MM_WIDTH, MM_HEIGHT],   // ← custom height, garantili 1 sayfa
+    format:      [MM_WIDTH, MM_HEIGHT],
     compress:    true,
   })
 
@@ -431,7 +385,6 @@ export async function generateQuotePDF(customerInfo, pricing) {
     MM_HEIGHT
   )
 
-  // 6. İndir
   const safeName = (customerInfo.name || 'musteri')
     .replace(/\s+/g, '_')
     .replace(/[<>:"/\\|?*]/g, '')

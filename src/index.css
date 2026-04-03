@@ -26,7 +26,7 @@
 }
 
 @layer components {
-  /* ── Glassmorphism ──────────────────────────── */
+ 
   .glass {
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(14px);
@@ -43,7 +43,7 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
-  /* ── Buttons ───────────────────────────────── */
+ 
   .btn-primary {
     background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
     border: 1px solid rgba(124, 58, 237, 0.4);
@@ -59,7 +59,7 @@
   }
   .btn-primary:active { transform: translateY(0); }
 
-  /* ── Typography helpers ─────────────────────── */
+
   .gradient-text {
     background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 50%, #4f46e5 100%);
     -webkit-background-clip: text;
@@ -71,7 +71,7 @@
     @apply text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35 mb-3;
   }
 
-  /* ── Shimmer skeleton ───────────────────────── */
+
   .shimmer-bg {
     background: linear-gradient(
       90deg,
@@ -83,7 +83,6 @@
     animation: shimmer 2.5s linear infinite;
   }
 
-  /* ── Noise texture overlay ──────────────────── */
   .noise::after {
     content: '';
     position: absolute;
@@ -93,7 +92,6 @@
     border-radius: inherit;
   }
 
-  /* ── Input ──────────────────────────────────── */
   .input-field {
     @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white
            placeholder-white/25 outline-none transition-all duration-200;

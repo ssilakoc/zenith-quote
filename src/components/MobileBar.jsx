@@ -1,7 +1,4 @@
-/**
- * MobileBar — Mobilde sayfanın altında sabit duran fiyat çubuğu.
- * Desktop'ta görünmez.
- */
+
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
@@ -22,7 +19,7 @@ export default function MobileBar({ pricing, onGetQuote }) {
           exit={{ y: 80 }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* blur backdrop */}
+          
           <div className="absolute inset-0 bg-[#0a0f1e]/80 backdrop-blur-xl border-t border-white/[0.08]" />
 
           <div className="relative px-4 py-3 flex items-center gap-3">
@@ -49,7 +46,6 @@ export default function MobileBar({ pricing, onGetQuote }) {
             </button>
           </div>
 
-          {/* iPhone home indicator spacing */}
           <div className="h-safe-bottom bg-transparent" />
         </motion.div>
       )}

@@ -40,14 +40,14 @@ export default function App() {
       <main className="mx-auto max-w-7xl px-4 py-10 pb-32 lg:pb-10">
         <div className="lg:grid lg:grid-cols-[1fr_340px] lg:gap-8 xl:gap-12">
 
-          {/* ── Left: service selection ─────── */}
+          
           <ServiceGrid
             selectedServices={selectedServices}
             onToggle={toggleService}
             pricing={pricing}
           />
 
-          {/* ── Right: sticky summary ──────── */}
+       
           <aside className="hidden lg:block">
             <PriceSummary
               pricing={pricing}
@@ -59,10 +59,10 @@ export default function App() {
         </div>
       </main>
 
-      {/* ── Mobile sticky bar ─────────────── */}
+   
       <MobileBar pricing={pricing} onGetQuote={() => setShowForm(true)} />
 
-      {/* ── Customer form modal ───────────── */}
+ 
       <AnimatePresence>
         {showForm && (
           <CustomerForm

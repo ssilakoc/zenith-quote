@@ -24,11 +24,11 @@ export default function PriceSummary({ pricing, selectedServices, onGetQuote, on
 
   return (
     <div className="lg:sticky lg:top-6 space-y-3">
-      {/* ── Main summary card ──────────────── */}
+      
       <div className="glass rounded-2xl p-5 border border-white/[0.08]">
         <p className="section-label">Anlık Teklif Özeti</p>
 
-        {/* Empty state */}
+      
         <AnimatePresence mode="wait">
           {isEmpty ? (
             <motion.div
@@ -53,7 +53,7 @@ export default function PriceSummary({ pricing, selectedServices, onGetQuote, on
               exit={{ opacity: 0 }}
               className="space-y-3"
             >
-              {/* Selected services list */}
+     
               <div className="space-y-2">
                 {pricing.selectedServices.map(s => (
                   <motion.div
@@ -88,13 +88,12 @@ export default function PriceSummary({ pricing, selectedServices, onGetQuote, on
 
               <div className="h-px bg-white/[0.07]" />
 
-              {/* Subtotal */}
+              
               <div className="flex justify-between text-xs text-white/45">
                 <span>Ara Toplam</span>
                 <AnimatedPrice value={pricing.subtotal} />
               </div>
 
-              {/* Bundle discount */}
               <AnimatePresence>
                 {pricing.bundleDiscount && (
                   <motion.div
@@ -123,7 +122,6 @@ export default function PriceSummary({ pricing, selectedServices, onGetQuote, on
                 )}
               </AnimatePresence>
 
-              {/* Corporate discount */}
               <AnimatePresence>
                 {pricing.corporateDiscount && (
                   <motion.div
@@ -152,7 +150,7 @@ export default function PriceSummary({ pricing, selectedServices, onGetQuote, on
                 )}
               </AnimatePresence>
 
-              {/* Threshold progress */}
+         
               <AnimatePresence>
                 {pricing.remainingToThreshold > 0 && pricing.subtotal > 0 && (
                   <motion.div
@@ -184,7 +182,7 @@ export default function PriceSummary({ pricing, selectedServices, onGetQuote, on
                 )}
               </AnimatePresence>
 
-              {/* Total */}
+            
               <div className="h-px bg-white/[0.07]" />
               <div className="flex items-end justify-between">
                 <div>
@@ -219,7 +217,7 @@ export default function PriceSummary({ pricing, selectedServices, onGetQuote, on
         </AnimatePresence>
       </div>
 
-      {/* ── CTA button ─────────────────────── */}
+    
       <AnimatePresence>
         {!isEmpty && (
           <motion.button
@@ -236,7 +234,6 @@ export default function PriceSummary({ pricing, selectedServices, onGetQuote, on
         )}
       </AnimatePresence>
 
-      {/* ── Near-bundle hints ──────────────── */}
       {pricing.nearBundles && pricing.nearBundles.length > 0 && (
         <div className="glass rounded-xl p-4 border border-amber-500/15">
           <p className="text-[10px] font-semibold text-amber-400 mb-2 flex items-center gap-1.5">
@@ -263,7 +260,6 @@ export default function PriceSummary({ pricing, selectedServices, onGetQuote, on
         </div>
       )}
 
-      {/* ── Trust micro-copy ───────────────── */}
       <p className="text-center text-[10px] text-white/20 leading-relaxed px-2">
         🔒 Bilgileriniz güvende · Teklif 15 gün geçerli · Ücretsiz danışma hakkı
       </p>

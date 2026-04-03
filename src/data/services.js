@@ -1,6 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-//  SERVICE CATALOGUE  –  Web Tasarım & Dijital Marka Yönetimi
-// ─────────────────────────────────────────────────────────────
 
 export const SERVICES_DATA = [
   {
@@ -286,10 +283,6 @@ export const SERVICES_DATA = [
   },
 ]
 
-// ─────────────────────────────────────────────────────────────
-//  BUNDLE DISCOUNT RULES
-//  En yüksek iskonto oranı uygulanır (birden fazla uygunsa)
-// ─────────────────────────────────────────────────────────────
 
 export const BUNDLE_DISCOUNTS = [
   {

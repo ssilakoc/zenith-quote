@@ -61,7 +61,7 @@ export default function CustomerForm({ pricing, onClose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {/* Dim backdrop */}
+    
       <motion.div
         className="absolute inset-0 bg-black/75 backdrop-blur-sm"
         onClick={!loading ? onClose : undefined}
@@ -70,7 +70,6 @@ export default function CustomerForm({ pricing, onClose }) {
         exit={{ opacity: 0 }}
       />
 
-      {/* Modal panel */}
       <motion.div
         className="relative z-10 w-full sm:max-w-lg bg-[#0d1635] border border-white/[0.09] rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden"
         initial={{ y: 60, opacity: 0, scale: 0.97 }}
@@ -78,10 +77,10 @@ export default function CustomerForm({ pricing, onClose }) {
         exit={{ y: 60, opacity: 0, scale: 0.97 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* Rainbow accent bar */}
+       
         <div className="h-[3px] bg-gradient-to-r from-epurple via-epurple-light to-blue-500" />
 
-        {/* Header */}
+       
         <div className="flex items-center justify-between px-6 pt-5 pb-3">
           <div>
             <h2 className="text-base font-bold text-white">Teklifinizi Alın</h2>
@@ -98,7 +97,7 @@ export default function CustomerForm({ pricing, onClose }) {
           </button>
         </div>
 
-        {/* Pricing pill */}
+
         <div className="mx-6 mb-5 flex items-center justify-between px-4 py-3 rounded-xl bg-epurple/10 border border-epurple/20">
           <div>
             <p className="text-[10px] text-white/35 mb-0.5">Seçilen Toplam</p>
@@ -116,7 +115,6 @@ export default function CustomerForm({ pricing, onClose }) {
           </div>
         </div>
 
-        {/* ── Başarı ekranı ─────────────────────────── */}
         <AnimatePresence mode="wait">
           {done ? (
             <motion.div
@@ -144,7 +142,7 @@ export default function CustomerForm({ pricing, onClose }) {
               </button>
             </motion.div>
           ) : (
-            /* ── Form ──────────────────────────────── */
+         
             <motion.form
               key="form"
               onSubmit={handleSubmit}

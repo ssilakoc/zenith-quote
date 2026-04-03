@@ -23,7 +23,6 @@ export default function ServiceCard({ service, selected, onToggle }) {
       whileHover={{ scale: 1.015 }}
       whileTap={{ scale: 0.985 }}
     >
-      {/* ── Popular badge ───────────────────── */}
       {service.popular && (
         <div className="absolute -top-2.5 left-4 flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-epurple to-epurple-light text-white text-[10px] font-semibold shadow-lg shadow-purple-900/50">
           <Sparkles size={9} />
@@ -31,7 +30,6 @@ export default function ServiceCard({ service, selected, onToggle }) {
         </div>
       )}
 
-      {/* ── Checkbox ───────────────────────── */}
       <div className="flex items-start gap-3">
         <div className="mt-0.5 shrink-0">
           <motion.div
@@ -68,7 +66,6 @@ export default function ServiceCard({ service, selected, onToggle }) {
               </p>
             </div>
 
-            {/* Price */}
             <div className="text-right shrink-0">
               <p className={`text-sm font-bold ${selected ? 'text-epurple-lighter' : 'text-white/70'}`}>
                 {fmt(service.price)}
@@ -79,7 +76,6 @@ export default function ServiceCard({ service, selected, onToggle }) {
             </div>
           </div>
 
-          {/* Delivery */}
           {service.deliveryDays > 0 && (
             <div className="flex items-center gap-1 mt-1.5 text-[10px] text-white/28">
               <Clock size={9} />
@@ -89,7 +85,6 @@ export default function ServiceCard({ service, selected, onToggle }) {
         </div>
       </div>
 
-      {/* ── Includes list (expanded when selected) ── */}
       <AnimatePresence>
         {selected && (
           <motion.div
@@ -111,7 +106,6 @@ export default function ServiceCard({ service, selected, onToggle }) {
         )}
       </AnimatePresence>
 
-      {/* ── Tooltip trigger ──────────────────── */}
       <button
         type="button"
         className="absolute bottom-3 right-3 text-white/25 hover:text-epurple-lighter transition-colors"
@@ -121,7 +115,6 @@ export default function ServiceCard({ service, selected, onToggle }) {
         <Info size={13} />
       </button>
 
-      {/* ── Tooltip popup ───────────────────── */}
       <AnimatePresence>
         {tipVisible && (
           <motion.div
@@ -138,7 +131,6 @@ export default function ServiceCard({ service, selected, onToggle }) {
                 {service.conversionTip}
               </p>
             </div>
-            {/* Arrow */}
             <div className="absolute -bottom-1.5 right-5 w-3 h-3 bg-[#1a1040] border-r border-b border-epurple/30 rotate-45" />
           </motion.div>
         )}
